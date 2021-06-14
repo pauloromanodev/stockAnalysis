@@ -19,37 +19,34 @@ with open('SBSP3.SA.csv') as csv_file:
             lista_valor_abertura.insert(len(lista_valor_abertura), row[1])
         else:
             linhas_validas += 1
-            
+
 
 total_dias = len(lista_valor_abertura)
-mes_1 = int((total_dias) / 12)
-mes_3 = int((total_dias) / 4)
-mes_6 = int((total_dias) / 2)
-mes_12 = total_dias
 
-print(f'Total de dias: {total_dias}')
-print(f'12 meses: {mes_12}')
-print(f'6 meses: {mes_6}')
-print(f'3 meses: {mes_3} ')
-print(f'1 mês: {mes_1}')
+qtd_dias = int(total_dias) / (12 / int(qtd_meses))
 
-x_mes1 = total_dias - mes_1
-x_mes3 = total_dias - mes_3
-x_mes6 = total_dias - mes_6
-x_mes12 = 0
+print(f'Total de dias geral: {total_dias}')
+print(f'Total de dias selecionado: {qtd_dias}')
+print(f'Período: {qtd_meses} meses')
 
+var_mes = int(total_dias) - int(qtd_dias)
 
-#corre 3 meses
-for x in lista_valor_abertura[x_mes12:]:
+print(f'var_mes:  {var_mes}')
+
+if var_mes == 0:
+    var_mes = 1
+
+for x in lista_valor_abertura[var_mes:]:
     valor_abertura += float(x)
 
     conta_linhas += 1
 
     valor_atual = float(x)
-    
 
-preco_medio = valor_abertura / mes_12
 
-#print(f'Linhas válidas: {str(linhas_validas)}')
+print(valor_abertura)
+
+preco_medio = float(valor_abertura) / int(qtd_dias)
+
 print(f'Preço médio: {str(preco_medio)}')
 print(f'Valor atual: {str(valor_atual)}')
